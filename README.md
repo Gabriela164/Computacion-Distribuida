@@ -25,6 +25,6 @@ Ayudante de teoría: Alan Alexis Martínez López <br>
     </tr>
     <tr>
         <td>Martínez Hidalgo Paola Mildred</td>
-        <td>318181637</td>
+        <td>319300217</td>
     </tr>
 </table>
