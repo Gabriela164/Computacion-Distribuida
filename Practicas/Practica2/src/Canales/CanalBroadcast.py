@@ -6,7 +6,6 @@ class CanalBroadcast(Canal):
     '''
     Clase que modela un canal, permite enviar mensajes one-to-many.
     '''
-
     def __init__(self, env, capacidad=simpy.core.Infinity):
         self.env = env
         self.capacidad = capacidad
@@ -17,6 +16,7 @@ class CanalBroadcast(Canal):
         Envia un mensaje a los canales de salida de los vecinos.
         '''
         # Tu código aquí
+
 
     def crea_canal_de_entrada(self):
         '''
