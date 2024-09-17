@@ -105,6 +105,7 @@ class TestPractica1:
             assert mensaje_enviado == nodo.mensaje, (
                 'El nodo %d no tiene el mensaje correcto' % nodo.id_nodo)
 
+
     # Prueba para el algoritmo de Convergecast.
     def test_ejercicio_cuatro(self):
         ''' Prueba para el algoritmo de Convergecast. '''
@@ -142,4 +143,3 @@ class TestPractica1:
         resultado = sum(val for _, val in raiz.val_set)
         assert resultado == valor_esperado, (
             'El valor total procesado por la raíz es incorrecto')
-

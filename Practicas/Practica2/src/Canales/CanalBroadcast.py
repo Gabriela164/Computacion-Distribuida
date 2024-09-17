@@ -15,8 +15,11 @@ class CanalBroadcast(Canal):
         '''
         Envia un mensaje a los canales de salida de los vecinos.
         '''
-        # Tu código aquí
-
+        eventos = list()
+        for i in range(len(self.canales)):
+            if i in vecinos:
+                eventos.append(self.canales[i].put(mensaje))
+        return self.env.all_of(eventos)
 
     def crea_canal_de_entrada(self):
         '''

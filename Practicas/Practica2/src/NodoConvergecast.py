@@ -1,19 +1,23 @@
 import simpy
 from Nodo import Nodo
+from Canales.CanalConvergecast import *
 
 TICK = 1
 
 class NodoConvergecast(Nodo):
+    
+    ''' Implementa la interfaz de Nodo para el algoritmo de convergecast.'''
+
     def __init__(self, id_nodo, vecinos, canal_entrada, canal_salida):
         '''
         Inicializa un nodo de Convergecast.
-
-        :param id_nodo: Identificador único del nodo.
-        :param vecinos: Lista de IDs de nodos vecinos.
-        :param canal_entrada: Canal de entrada para recibir mensajes.
-        :param canal_salida: Canal de salida para enviar mensajes.
         '''
-        super().__init__(id_nodo, vecinos, canal_entrada, canal_salida)
+        self.id_nodo = id_nodo
+        self.canal_entrada = canal_entrada
+        self.canal_salida = canal_salida
+        self.vecinos = vecinos
+        
+        #Atributos propios del algoritmo
         self.padre = None            
         self.hijos = []    
         self.valor = self.id_nodo   
@@ -24,11 +28,12 @@ class NodoConvergecast(Nodo):
     def convergecast(self, env):
         '''
         Implementa el algoritmo de Convergecast para el nodo.
-
         :param env: Entorno de simulación de SimPy.
         '''
+        
+        #Lineas 1-7 del pseudocodigo
         if not self.hijos:
-            # Caso base: nodo hoja (sin hijos)
+            # El algoritmo lo comienza todo nodo hoja (sin hijos)
             yield env.timeout(TICK)  # Espera un tiempo antes de enviar el mensaje
             mensaje = ("BACK", self.id_nodo, self.val_set) 
             self.canal_salida.envia(mensaje, [self.padre])
@@ -38,14 +43,17 @@ class NodoConvergecast(Nodo):
             while self.esperando_de:
                 # Espera un mensaje de los canales de entrada
                 mensaje = yield self.canal_entrada.get()
+                
+                #Lineas 8-16 pseudocodigo
                 if mensaje[0] == "BACK":
-                    sender_id = mensaje[1]  
-                    val_set_hijo = mensaje[2]  
+                    sender_id = mensaje[1]              #id del nodo que acaba de mandar el mensaje
+                    val_set_hijo = mensaje[2]           #Conjunto de valores que el hijo ha acumulado hasta ese momento
                     self.val_set.update(val_set_hijo)  
                     self.esperando_de.remove(sender_id)  
 
             # Una vez recibidos todos los mensajes de los hijos
-            if self.padre is not None:
+            #Linea 11 del pseudocodigo
+            if self.padre != self.id_nodo:
                 yield env.timeout(TICK)  # Espera un tiempo antes de enviar el mensaje al padre
                 mensaje = ("BACK", self.id_nodo, self.val_set)  # Mensaje para enviar al padre
                 self.canal_salida.envia(mensaje, [self.padre])

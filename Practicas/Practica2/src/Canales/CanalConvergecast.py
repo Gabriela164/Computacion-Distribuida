@@ -12,6 +12,17 @@ class CanalConvergecast:
         self.capacidad = capacidad
         self.canales = {} 
 
+    def envia(self, mensaje, vecinos):
+        '''
+        Envía un mensaje a los destinatarios especificados.
+
+        :param mensaje: Mensaje a enviar (debe ser un objeto serializable).
+        :param destinatarios: Lista de IDs de los nodos destinatarios.
+        '''
+        for vecino in vecinos:
+            if vecino in self.canales:
+                self.canales[vecino].put(mensaje)
+                
     def crea_canal_de_entrada(self, id_nodo):
         '''
         Crea un canal de entrada para un nodo específico.
@@ -22,14 +33,3 @@ class CanalConvergecast:
         canal = simpy.Store(self.env, capacity=self.capacidad) 
         self.canales[id_nodo] = canal
         return canal
-
-    def envia(self, mensaje, destinatarios):
-        '''
-        Envía un mensaje a los destinatarios especificados.
-
-        :param mensaje: Mensaje a enviar (debe ser un objeto serializable).
-        :param destinatarios: Lista de IDs de los nodos destinatarios.
-        '''
-        for destinatario in destinatarios:
-            if destinatario in self.canales:
-                self.canales[destinatario].put(mensaje)

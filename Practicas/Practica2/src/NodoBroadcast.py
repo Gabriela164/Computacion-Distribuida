@@ -20,3 +20,4 @@ class NodoBroadcast(Nodo):
         ''' Algoritmo de Broadcast. Desde el nodo distinguido (0)
             vamos a enviar un mensaje a todos los demás nodos.'''
         # Tú código aquí
+        pass

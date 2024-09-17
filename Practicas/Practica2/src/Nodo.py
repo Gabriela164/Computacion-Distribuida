@@ -13,7 +13,6 @@ class Nodo:
         self.vecinos = vecinos
         self.canal_entrada = canal_entrada
         self.canal_salida = canal_salida
-           
         
     def get_id(self) -> int:
         '''Regresa el id del nodo.'''

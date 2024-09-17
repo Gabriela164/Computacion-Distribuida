@@ -25,13 +25,7 @@ class CanalGenerador(Canal):
         '''
         Creamos un objeto Store en el cual recibiremos los mensajes.
         '''
-        canal = simpy.Store(self.env, capacity=self.capacidad)
-        self.canales.append(canal)
-        self.canal_de_salida = canal
-        return canal
+        canal_entrada = simpy.Store(self.env, capacity=self.capacidad)
+        self.canales.append(canal_entrada)
+        return canal_entrada
     
-    def get_canal_de_salida(self):
-        '''
-        Regresa el objeto Store en el cual recibiremos los mensajes.
-        '''
-        return self.canal_de_salida
