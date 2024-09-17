@@ -1,14 +1,17 @@
-from Canales.CanalBroadcast import *
-from NodoBroadcast import *
-from NodoGenerador import *
-from NodoVecinos import *
+import simpy
+from Canales.CanalBroadcast import CanalBroadcast
+from Canales.CanalConvergecast import CanalConvergecast
+from NodoBroadcast import NodoBroadcast
+from NodoGenerador import NodoGenerador
+from NodoVecinos import NodoVecinos
+from NodoConvergecast import NodoConvergecast
 
 # Las unidades de tiempo que les daremos a las pruebas
 TIEMPO_DE_EJECUCION = 50
 
-
 class TestPractica1:
     ''' Clase para las pruebas unitarias de la práctica 1. '''
+    
     # Las aristas de adyacencias de la gráfica.
     adyacencias = [[1, 2], [0, 3], [0, 3, 5], [1, 2, 4], [3, 5], [2, 4]]
 
@@ -101,3 +104,42 @@ class TestPractica1:
         for nodo in grafica:
             assert mensaje_enviado == nodo.mensaje, (
                 'El nodo %d no tiene el mensaje correcto' % nodo.id_nodo)
+
+    # Prueba para el algoritmo de Convergecast.
+    def test_ejercicio_cuatro(self):
+        ''' Prueba para el algoritmo de Convergecast. '''
+        # Creamos el ambiente y el objeto Canal
+        env = simpy.Environment()
+        capacidad = 10 
+        cc_pipe = CanalConvergecast(env, capacidad)
+
+        # La lista que representa el árbol
+        grafica = []
+
+        # Creamos los nodos
+        for i in range(len(self.adyacencias_arbol)):
+            grafica.append(NodoConvergecast(i, self.adyacencias_arbol[i],
+                                            cc_pipe.crea_canal_de_entrada(i), cc_pipe))
+
+        # Asignamos los padres a los nodos para construir el árbol
+        for i, nodo in enumerate(grafica):
+            for hijo in nodo.vecinos:
+                grafica[hijo].padre = nodo.id_nodo
+                nodo.hijos.append(hijo)
+
+        # Le decimos al ambiente lo que va a procesar
+        for nodo in grafica:
+            env.process(nodo.convergecast(env))
+        # Se ejecuta
+        env.run(until=TIEMPO_DE_EJECUCION)
+
+        # Probamos que el resultado en la raíz sea el esperado
+        valor_esperado = sum(range(len(grafica)))  # La suma de los IDs de los nodos
+        raiz = grafica[0]
+        assert raiz.val_set == set((i, i) for i in range(len(grafica))), (
+            'El conjunto de valores en el nodo raíz es incorrecto')
+
+        resultado = sum(val for _, val in raiz.val_set)
+        assert resultado == valor_esperado, (
+            'El valor total procesado por la raíz es incorrecto')
+
