@@ -30,8 +30,6 @@ Implementación del algoritmo **broadcast**, construcción de un **árbol genera
 
 ### Implementación de Convergecast
 
-El algoritmo **Convergecast** es una técnica utilizada para recolectar información desde los nodos hoja de un árbol hacia un nodo raíz. Este proceso involucra a cada nodo transmitiendo sus datos a su nodo padre, hasta que toda la información llega al nodo raíz. En esta práctica, se implementó este algoritmo para un árbol de nodos con comunicación a través de canales.
-
 1. **Clase `NodoConvergecast`**:
    - Cada nodo tiene una lista de `vecinos`, un `padre`, y una lista de `hijos`.
    - El proceso de Convergecast inicia desde los nodos hoja, que envían su información al nodo padre.
