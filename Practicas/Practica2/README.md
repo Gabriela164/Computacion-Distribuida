@@ -21,7 +21,14 @@ Implementación del algoritmo **broadcast**, construcción de un **árbol genera
     </tr>
 </table>
 
-### Estructura del Proyecto
+### Evidencia: Todos los test pasan. 
+<div style="text-align: center;">
+    <img src="Imagenes/SS_pruebas.png" width="600">
+</div>
+
+
+
+### Estructura del Proyecto: Explicación del algoritmo convergecast.
 
 - `main.py`: Contiene la definición del algoritmo principal y los elementos necesarios para construir y simular la red de nodos.
 - `NodoConvergecast.py`: Define los nodos que forman parte de la simulación del algoritmo de Convergecast (Se basa en el pseudocódigo dado).
