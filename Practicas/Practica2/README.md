@@ -31,32 +31,20 @@ Implementación del algoritmo **broadcast**, construcción de un **árbol genera
 ### Implementación de Convergecast
 
 1. **Clase `NodoConvergecast`**:
-   - Cada nodo tiene una lista de `vecinos`, un `padre`, y una lista de `hijos`.
-   - El proceso de Convergecast inicia desde los nodos hoja, que envían su información al nodo padre.
-   - Cada nodo recibe información de sus hijos, agrega su propia información, y la envía a su padre hasta que la información llega al nodo raíz.
+   - Cada nodo tiene una lista de `vecinos`, un `padre`, y una lista de `hijos`. Psoteriormente el proceso de Convergecast inicia desde los nodos hoja, que envían su información al nodo padre.
+   Al final cada nodo recibe información de sus hijos, agrega su propia información, y la envía a su padre hasta que la información llega al nodo raíz.
 
 2. **Clase `CanalConvergecast`**:
-   - Los nodos se comunican a través de un canal de entrada y salida, que permite modelar el comportamiento de la comunicación en una red distribuida.
-   - El canal tiene una capacidad que puede limitar la cantidad de mensajes que pueden ser procesados al mismo tiempo.
+   - Los nodos se comunican a través de un canal de entrada y salida, que permite modelar el comportamiento de la comunicación en una red distribuida. El canal tiene una capacidad que puede limitar la cantidad de mensajes que pueden ser procesados al mismo tiempo.
 
 ### Explicación del `main.py`
 
-El archivo `main.py` contiene la lógica principal para inicializar la simulación, crear los nodos y definir las relaciones entre ellos. Los pasos principales incluyen:
-
-1. **Creación del Entorno de Simulación**:
-   Se utiliza `simpy.Environment()` para crear el entorno de simulación en el que los nodos se comunicarán a través de los canales definidos.
-
-2. **Construcción del Árbol**:
-   - Los nodos y sus relaciones padre-hijo se configuran manualmente para crear la estructura del árbol.
-   - A cada nodo se le asigna un canal de entrada y se conecta a un canal común que se utiliza para transmitir los mensajes durante el proceso de Convergecast.
-
-3. **Ejecución del Algoritmo**:
-   - Cada nodo ejecuta su proceso de Convergecast, que involucra recibir los datos de los nodos hijos, agregar su propio dato, y transmitirlo al nodo padre.
-   - El entorno de simulación se ejecuta durante un tiempo definido, suficiente para completar el proceso de Convergecast.
+El archivo `main.py` es responsable de la inicialización y ejecución de la simulación. Primero, se crea un entorno de simulación utilizando `simpy.Environment()`, lo cual permite gestionar la interacción entre los nodos y los canales. Posteriormente, se define la estructura del árbol, asignando manualmente las relaciones entre los nodos, es decir, quién es padre de quién. Cada nodo se conecta a través de un canal común de comunicación y, una vez que el árbol está construido, se ejecuta el proceso de Convergecast. Cada nodo ejecuta su algoritmo, acumulando los datos de sus hijos y transmitiéndolos hacia su nodo padre.
 
 ### Método de Prueba en `test.py`
 
-Se agregó un método de prueba en `test.py` para asegurar que el algoritmo de Convergecast se esté ejecutando correctamente. Este método simula el proceso y verifica que los resultados en el nodo raíz sean los esperados.
+En el archivo `test.py`, se añadió un método específico para validar que el algoritmo de Convergecast se ejecute correctamente. La prueba se realiza mediante la simulación de un conjunto de nodos conectados, verificando que el nodo raíz reciba la suma de los valores de todos los nodos de la red. Para ello, se utiliza el método `test_ejercicio_cuatro`, que crea el entorno de simulación y define los nodos junto con sus respectivos canales de comunicación. Posteriormente, el algoritmo de Convergecast es ejecutado y se verifica que el conjunto de valores recibido en el nodo raíz sea correcto. Si todo funciona según lo esperado, el resultado en la raíz será la suma de los IDs de los nodos, confirmando así la correcta ejecución del algoritmo.
+
 
 #### `test_ejercicio_cuatro`
 
