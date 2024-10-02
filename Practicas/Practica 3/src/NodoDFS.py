@@ -25,13 +25,13 @@ class NodoDFS(Nodo):
         #Si somos el nodo distinguido 
         if self.id_nodo == 0:
             
-            self.padre = 0  #El nodo raíz se asigna asimismo como el propio nodo padre
+            self.padre = self.id_nodo  #El nodo raíz se asigna asimismo como el propio nodo padre
             self.visitados.add(self.id_nodo)
+            
             k = min(self.vecinos) #Tomamos k vecino más pequeño
-
             #Enviaos GO al k vecino 
             yield env.timeout(TICK)
-            self.canal_salida.envia(["GO", self.id_nodo, set([self.id_nodo])], [k])
+            self.canal_salida.envia(["GO", self.id_nodo, self.visitados], [k])
             self.hijos.append(k)
                                 
         while True:
