@@ -37,3 +37,20 @@
 <div style="text-align: center;">
     <img src="img/SS.png" width="440" height="230">
 </div>
+
+** Algoritmo BFS **
+<br>
+La clase NodoBFS modela los nodos para poder aplicarles el algoritmo BFS, en el cual cada nodo cuenta con un identificador único (id_nodo) y un conjunto de nodos vecinos a los que le puede enviar un mensaje. Igual tenemos otras clases las cuales son los canales de comunicación para recibir y enviar mensajes. 
+<br>
+Explicaremos la implementación del algoritmo BFS. 
+Primero empezamos con el nodo raíz, si el nodo raíz es id_nodo=0, entonces enviamos un mensaje "GO" a todos sus vecinos con su ID (self.id_nodo) y también se envía la distancia (self_distancia), usamos (yield env.timeout(TICK)) para el tiempo y el mensaje "GO" le indica a los vecinos que empiecen a explorar los demás nodos.  
+<br>
+Cuando caemos en while True cada nodo espera un mensaje en su canal de entrada. 
+Si se recibe un mensaje "GO" tenemos tres casos.
+- Si el nodo aún no tiene un padre se establece como padre al nodo que le envió el mensaje, actualiza su distancia y envía mensajes "GO" a sus vecinos a excepto al padre. 
+- Si el nodo ya tiene un padre y recibe un mensaje de un nodo a una distancia menor, se actualiza su padre y envía un mensaje "GO" a sus vecinos. 
+- Si el nodo ya fue visitado y su nivel es menor o igual que el del nodo remitente, se manda un mnesaje "BACK" para indicar que ya fue visitado.
+<br>
+Cuando un nodo recibe un mensaje "BACK" tiene que actualizar el contador de los mjs_esperados, en caso de que ya no haya mensajes por recibir de sus vecinos se envía un mensaje "BACK" a su padre. 
+<br>
+Los mensajes "BACK" se envían de abajo hacia arriba en el árbol de BFS, por lo que hasta que  el nodo raíz recibe el mensaje "BACK" se termina el algoritmo.
