@@ -34,3 +34,6 @@
 </table>
 
 ## 🔧 Evidencia pasan todas las pruebas
+<div style="text-align: center;">
+    <img src="img/SS.png" width="440" height="230">
+</div>
