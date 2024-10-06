@@ -53,3 +53,10 @@ Cuando un nodo recibe un mensaje "BACK" tiene que actualizar el contador de los 
 Los mensajes "BACK" se envían de abajo hacia arriba en el árbol de BFS, por lo que hasta que  el nodo raíz recibe el mensaje "BACK" se termina el algoritmo.
 
 ## Explicación de la implementación del algoritmo DFS
+La implementación del algoritmo DFS en la clase NodoDFS simula cómo los nodos de una red exploran sus vecinos de manera recursiva, utilizando una estrategia de búsqueda en profundidad. Cada nodo está identificado por un id_nodo único y tiene un conjunto de vecinos con los que puede comunicarse mediante canales de entrada y salida.<br>
+
+El proceso comienza en el nodo raíz, que es el nodo con id_nodo == 0. Este nodo se asigna a sí mismo como su propio padre y se marca como visitado. Luego, selecciona el vecino con el ID más pequeño entre sus vecinos y le envía un mensaje "GO", iniciando así el recorrido DFS. El objetivo del mensaje "GO" es preparar a los nodos receptores para que comiencen a explorar sus propios vecinos. A medida que los nodos reciben estos mensajes, asignan al nodo remitente como su padre y determinan si todos sus vecinos ya han sido visitados. Si todos los vecinos ya fueron explorados, el nodo envía un mensaje "BACK" al nodo padre, indicando que ha terminado de visitar a todos los nodos conectados.<br>
+
+El algoritmo sigue explorando en profundidad seleccionando vecinos no visitados. Si un nodo encuentra que aún queda algún vecino sin visitar, selecciona el vecino no visitado con el ID más bajo y continúa la exploración enviando otro mensaje "GO". Si todos los vecinos de un nodo ya fueron visitados, el nodo envía el mensaje "BACK" hacia arriba, infromando a su padre que ha completado su parte de la exploración.<br>
+
+A medida que el algoritmo progresa, los mensajes "GO" descienden en la red, dirigiendo a los nodos a explorar más profundamente, mientras que los mensajes "BACK" ascienden, informando del final de la exploración. La elección del vecino con el ID más bajo en cada paso da al algoritmo una estructura ordenada, y el conjunto de nodos visitados asegura que no haya repeticiones ni bucles.<br>
