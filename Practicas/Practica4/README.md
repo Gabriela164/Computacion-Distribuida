@@ -33,7 +33,7 @@
 
 ## 💭 Explicación de la implementación del algoritmo
 
-Para esta práctica se implementó el algoritmo de consenso, en el cual se prsentarán nodos los cuales fallarán durante la ejecución, a continuación explicaremos la forma en la que lo implemetamos.  
+Para esta práctica se implementó el algoritmo de consenso, en el cual tendremos nodos los cuales fallarán durante la ejecución, a continuación explicaremos la forma en la que lo implementamos.  
 
 Primero se empieza definiendo el número de rondas que se tendrán, esto sera el total de fallos + 1. Después al pasar a while tendremos varios casos:
 
