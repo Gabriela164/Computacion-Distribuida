@@ -28,5 +28,6 @@
 
 ## 🔧 Evidencia pasan todas las pruebas
 <div style="text-align: center;">
+<img src="img/ss.png" height="300">
 </div>
 
