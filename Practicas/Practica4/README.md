@@ -45,6 +45,6 @@ Tercer if (línea 45-49): Si nos encontramos en la última ronda el nodo actual 
 
 (línea 51) Como nos encontramos en la última ronda, una vez que se guardaron los mensajes vamos a vaciar la lista con el conjunto de mensajes que tenía, esto lo haremos ya que la lista debe de estar vacía para la siguiente ronda (recordemos que el total de rondas es de f+1). 
 
-(línea 53-59) El nodo actual revisa los mensajes que recibió (if anterior) y si encuentra información nueva de algún vecino la almacena la lista de valores en self.V y agrega los nuevos mensajes a self.New para mandarlos en la siguiente ronda. 
+(línea 53-59) El nodo actual revisa los mensajes que recibió (if anterior) y si encuentra información nueva de algún vecino la almacena en la lista de valores en self.V y agrega los nuevos mensajes a self.New para mandarlos en la siguiente ronda. 
 
 (línea 61-65) Último if: En la última ronda el nodo actual revisa los valores de self.V, y aquí es donde se determina el líder, ya que si encuentra un valor que no sea None, este se proclama como el líder (self.lider) y lo devuelve como resultado (return elem).
