@@ -59,6 +59,7 @@ En la línea 47 mediante el canal_salida se envía el mensaje a cada vecino en d
 
 En resumen la implementación de este algoritmo tiene como objetivo pasar el algoritmo BroadCast a un sistema asíncrono con ayuda de los relojes Lamport, donde todos los nodos tienen una visión del orden de eventos y el tiempo de entrega de mensajes puede variar.
 
+</div>
 **Implementación del reloj vectorial**
 
 Para la implementación del reloj vectorial se usó como base el algoritmo DFS.
