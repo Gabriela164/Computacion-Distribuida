@@ -3,8 +3,6 @@ from Nodo import *
 from Canales.CanalRecorridos import *
 from random import randint
 
-TICK = 1
-
 class NodoDFS(Nodo):
     def __init__(self, id_nodo, vecinos, canal_entrada, canal_salida, num_nodos):
         """
