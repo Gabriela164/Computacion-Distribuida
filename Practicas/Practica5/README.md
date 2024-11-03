@@ -29,12 +29,11 @@
 
 ## 🔧 Evidencia pasan todas las pruebas
 <div style="text-align: center;">
-<img src="img/ss.png" height="300">
+<img src="img/SS.png" height="250">
 </div>
 
-## 💭 Explicación de la implementación
 
-## Implementación del reloj Lamport:
+## 🕓 Implementación del reloj Lamport:
 
  Para la implementación del reloj Lamport se usó como base el algoritmo de BroadCast. 
 
@@ -59,7 +58,7 @@ En la línea 47 mediante el canal_salida se envía el mensaje a cada vecino en d
 
 En resumen la implementación de este algoritmo tiene como objetivo pasar el algoritmo BroadCast a un sistema asíncrono con ayuda de los relojes Lamport, donde todos los nodos tienen una visión del orden de eventos y el tiempo de entrega de mensajes puede variar.
 
-## Implementación del reloj vectorial
+## 🕓 Implementación del reloj vectorial
 
 Para la implementación del reloj vectorial se usó como base el algoritmo DFS.
 
